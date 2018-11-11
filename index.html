@@ -1,0 +1,94 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GifTastic</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/gif.js"></script>
+</head>
+
+<body class="position-relative border">
+    <div class="container mt-5 mb-5 bg-info border border-white" id="Outer-container">
+        <div class="row">
+            <div class="col-12 text-center text-white py-3 " id="header">
+                <h1>GifTastic</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container mt-1" id="inner-container-1">
+                    <div class="row">
+                        <div class="col-md-auto mt-4">
+                            <form>
+                                <label for="CustomSelectLimit" class="text-muted">Set limit</label>
+                                <input class="border border-info  mx-1 my-1 text-muted text-center" type="number" min="1"
+                                    max="25" id="CustomSelectLimit">
+                            </form>
+                        </div>
+                        <div class="col-md-9 mt-3" id="topic-button-view">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="container mt-2 " id="inner-container-2">
+                    <div class="row ">
+                        <div class="col-md-3 border border-white" id="addanimal">
+                            <form>
+                                <label class="text-white mt-5 pt-3" for="topic-input">Add Animal</label><br>
+                                <input type="text" id="topic-input" class="my-2" data-placement="top" placeholder="animal..."><br>
+                                <button value="Add Animal" id="add-topic" class="btn-info ">Add Animal</button>
+                            </form>
+                        </div>
+                        <div class="col-md-6" id="middleDiv">
+                            
+                        </div>
+                        <div class="col-md-3 text-right border border-white" id="mygif">
+                                <button value="favorite" id="myfavorit" class="btn btn-outline-light my-1 ">My Favorit</button></div>
+                    </div>
+                </div> 
+                    
+                       <div class="container mt-0 sticky-top" id="inner-container-3"> 
+                        <div class="row bg-info">
+                        <div class="col-md-1 text-left pt-2 displaygif" id="addmoregif"></div>
+                        <div class="col-md-2 text-right pt-2 displaygif text-white " id="favoriteselected"></div>
+                        <div class="col-md-2 text-left pt-2 displaygif" id="addtofavorite"></div>
+                        <div class="col-md-4 text-center text-white pt-2 displaygif" id="displayinfo">
+                        </div>
+                        <div class="col-md-3 text-right pt-2 displaygif" id="resetdiv"></div>
+                    </div> </div>
+            
+               
+                <div class="container mt-2 mb-1 " id="animal-container">
+
+                    <div class="row displaygif" id="display-selected-animal">
+                        <!--colomns can automatically generated -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3 mt-1 py-1 ">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <footer class="text-center text-muted mx-auto mt-5  py-2  position-absolute w-100 border border-white ">&copy;2018
+        Lidetu S Neshnega Seattle Wa</footer>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
