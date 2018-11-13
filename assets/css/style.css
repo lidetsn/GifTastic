@@ -1,16 +1,12 @@
-body{
+body,#inner-container-1,#inner-container-2,#animal-container,#mygif{
       /* background-image: url("../images/waterhead.gif");  */
       background-color:#ffffff;   
 }
 
-
-
-#mygif,#addanimal,footer{
+#addanimal,footer{
     background-color: #E6E6FA;
 }
-#inner-container-1,#inner-container-2,#animal-container{
-background-color: #ffffff
-}
+
 footer{
     bottom: 0;
 }
@@ -22,7 +18,10 @@ footer{
     background-image: url("../images/waterhead.gif");  
     
 }    
-#mygif{
+.rightSideMiddle{
     background-image: url("../images/water.gif");  
 
+}
+.smallDevice{
+    font-size: 12px;
 }

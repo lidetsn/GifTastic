@@ -14,10 +14,80 @@ var allThisTopicResponse=[];
 var indexOfThisResponse;
 
 
+$(document).ready(function () {
+          screenWidth = $(document).width();//get the width of the document to display approperiate gif according to the size
+                 //try to get the topicArray from the local storage
+            var   topicArrayInStorage=JSON.parse(localStorage.getItem("topicArray"));
+            var favoritArrayInStorage=JSON.parse(localStorage.getItem("favoriteArray"));
+            
+            if(topicArrayInStorage!==null){ // check it if it is exist and not null
+              topics=topicArrayInStorage
+            }
+            else{ //if it is not exist create one in the storage and initialize it with values in the topics
+              localStorage.setItem("topicArray", JSON.stringify(topics));
+
+            }
+            if(favoritArrayInStorage!==null){ // check it if it is exist and not null
+              favoritGif=favoritArrayInStorage
+              $("#myfavorit").html("My Favorit<br>"+favoritGif.length+" "+"items");
+            }
+            else{ //if it is not exist create one in the storage and initialize it 
+              localStorage.setItem("favoriteArray", JSON.stringify(favoritGif));
+
+            }
+         
+          renderTopicButtons();
+          if(screenWidth<768){
+              $("#mygif").removeClass("rightSideMiddle");
+              $("#myfavorit").removeClass("btn-outline-light");
+              $("#myfavorit").addClass("btn-outline-info");
+          }
+          //Add animal button click
+
+         $("#add-topic").on("click", function (event) {
+               event.preventDefault();
+              
+        if ($("#topic-input").val()) {//prevent empty insertion
+
+              var topic = $("#topic-input").val();
+              $("#topic-input").val("");
+              if (!topics.includes(topic.toLowerCase())) {//prevent duplicate insertion                          
+                    topics.push(topic.toLowerCase());
+                    localStorage.setItem("topicArray", JSON.stringify(topics));//update the data in the storage
+                    renderTopicButtons();
+              }
+              else {
+               
+                $("#topic-input").attr("data-original-title", topic.toUpperCase() + " already exist in the list")
+                $("#topic-input").tooltip("show");
+                setTimeout(removeTooltip, 4000,"#topic-input");
+                setTimeout(deleteTooltip, 4000,"#topic-input");
+              }
+        }
+        else {
+          
+          $("#topic-input").attr("data-original-title", "please enter the name of the animal to add")
+          $("#topic-input").tooltip("show");
+          setTimeout(removeTooltip, 4000,"#topic-input");
+          setTimeout(deleteTooltip, 4000,"#topic-input");
+        }
+  });
+
+});
+              $(document).on("click", ".topic-btn", displayTopicInfo);
+              $(document).on("click", ".clickToAnimate", animateThePic);
+              $(document).on("click", "#reset", reSetGifDisplay);
+              $(document).on("click", "#addmoregif", addMoreGif);
+              $(document).on("click", ".rad", checkFavorite);
+              $(document).on("click", "#addFavoriteButton", addToFavorite);
+              $(document).on("click", "#myfavorit", getMyFavorit);
+
 function displayTopicInfo() {
 
   if ($("#CustomSelectLimit").val() && $("#CustomSelectLimit").val() <= 25 && $("#CustomSelectLimit").val() > 0) {
-        
+       //   option 2 hiding the two container
+            $("#inner-container-2").hide();
+            $("#inner-container-1").hide();
         $(".displaygif").html("")
         allThisTopicResponse=[];
         offset = 0;
@@ -52,6 +122,7 @@ function displayTopicInfo() {
         setTimeout(deleteTooltip, 4000,"#CustomSelectLimit");
   }
 }
+
 function addMoreGif() {
           offset = offset + limit;
           limit = 10;
@@ -79,6 +150,7 @@ function getTopicGif() {
               
            });
         }
+
      function iterateTheResponse(start){
                 var ctrl;
                 for(start;start<allThisTopicResponse.length;start++){//added to handle the add to favorite
@@ -131,57 +203,16 @@ function animateThePic() {
       }
 }
 
-
-
-$(document).on("click", ".topic-btn", displayTopicInfo);
-$(document).on("click", ".clickToAnimate", animateThePic);
-$(document).on("click", "#reset", reSetGifDisplay);
-$(document).on("click", "#addmoregif", addMoreGif);
-$(document).on("click", ".rad", checkFavorite);
-$(document).on("click", "#addFavoriteButton", addToFavorite);
-$(document).on("click", "#myfavorit", getMyFavorit);
-
-
-$(document).ready(function () {
-          screenWidth = $(document).width();//get the width of the document to display approperiate gif according to the size
-          renderTopicButtons();
-  
-         $("#add-topic").on("click", function (event) {
-               event.preventDefault();
-              //  $("#middleDiv").html("");
-        if ($("#topic-input").val()) {//prevent empty insertion
-
-              var topic = $("#topic-input").val();
-              $("#topic-input").val("");
-              if (!topics.includes(topic.toLowerCase())) {//prevent duplicate insertion                          
-                    topics.push(topic.toLowerCase());
-                    renderTopicButtons();
-              }
-              else {
-               
-                $("#topic-input").attr("data-original-title", topic.toUpperCase() + " already exist in the list")
-                $("#topic-input").tooltip("show");
-                setTimeout(removeTooltip, 4000,"#topic-input");
-                setTimeout(deleteTooltip, 4000,"#topic-input");
-              }
-        }
-        else {
-          
-          $("#topic-input").attr("data-original-title", "please enter the name of the animal to add")
-          $("#topic-input").tooltip("show");
-          setTimeout(removeTooltip, 4000,"#topic-input");
-          setTimeout(deleteTooltip, 4000,"#topic-input");
-        }
-  });
-
-});
-
+              
 function removeTooltip(id) {
   $(id).tooltip("hide");
   
 }
 
 function reSetGifDisplay() {
+  // option 2 hiding the two container
+          $("#inner-container-2").show();
+         $("#inner-container-1").show();
           $(".displaygif").html("");
           removeTooltip("#addtofavorite"); 
           deleteTooltip("#addtofavorite");
@@ -216,6 +247,7 @@ function addToFavorite() {
         selectedGif.forEach(function (gif) {
               if (!favoritGif.includes(gif)) {
               favoritGif.push(gif);
+              localStorage.setItem("favoriteArray", JSON.stringify(favoritGif));//update local storage favorite
               numberOfGifaddedToFavorit++;
                }
              else{
@@ -223,11 +255,11 @@ function addToFavorite() {
              }
           })
   
-              $("#addtofavorite").html("");
-              setFavoriteButton("disabled", "true");
-              $("#myfavorit").html("My Favorit<br>"+favoritGif.length+" "+"items");
+         $("#addtofavorite").html("");
+         setFavoriteButton("disabled", "true");
+         $("#myfavorit").html("My Favorit<br>"+favoritGif.length+" "+"items");
   
-               selectedGif = [];
+          selectedGif = [];
   
   
             if(numberOfGifalreadyFoundInFavorit===0){
@@ -253,10 +285,13 @@ function addToFavorite() {
   function getMyFavorit(){
       
       if(favoritGif.length>0)  {
-              $(".displaygif").html("");
-              $("#middleDiv").html(""); 
-              $("#displayinfo").text("Now Displaying"+" "+ favoritGif.length+" "+"of your Favorite Gif");
-            for(var i=0;i<favoritGif.length;i++){      
+                  //  option 2 hiding the two container
+                $("#inner-container-2").hide();
+                $("#inner-container-1").hide();
+                $(".displaygif").html("");
+                $("#middleDiv").html(""); 
+                $("#displayinfo").text("Now Displaying"+" "+ favoritGif.length+" "+"of your Favorite Gif");
+       for(var i=0;i<favoritGif.length;i++){      
                 var animalDiv = $("<div>");
                 var animalImage = $("<img>");
                 animalDiv.addClass("col-md-auto my-2")
@@ -269,7 +304,7 @@ function addToFavorite() {
      
 
         }
-      else{
+       else{
              $("#myfavorit").attr("data-original-title","you have no item to display");
              $("#myfavorit").tooltip("show");
              setTimeout(removeTooltip, 5000,"#myfavorit");
@@ -298,10 +333,15 @@ function addToFavorite() {
   function makeCloseButton(){
 
       var closebtn = $("<button>");
-      closebtn.addClass("btn btn-outline-light bg-info");     
-       closebtn.html("&times") ;     
-      closebtn.attr("id", "reset");     
-      $("#resetdiv").append(closebtn)
+      closebtn.addClass("btn btn-outline-light");   
+      if(screenWidth<768) {
+        closebtn.addClass("smallDevice")
+      }
+        closebtn.attr("title","click to Go back") 
+        closebtn.html("&#8678;<br>Back") ;  
+        
+        closebtn.attr("id", "reset");     
+       $("#resetdiv").append(closebtn)
   }
 
   function setFavoriteButton(property,value) {
@@ -309,12 +349,22 @@ function addToFavorite() {
         f.addClass("btn btn-outline-light");
         f.attr("id", "addFavoriteButton")
         f.attr(property, value)
-        f.html("Add To Favorite");
+        if(screenWidth<768) {
+            f.addClass("smallDevice")
+        }
+        f.attr("title","Add to Favorit")
+        f.html("&#10032;<br>Add to Favorit");
+        
         $("#addtofavorite").append(f);
   }
   function  makeAddMoreButton(){
     var addmore = $("<button>");
-        addmore.text("Add more")
+        if(screenWidth<768) {
+            addmore.addClass("smallDevice")
+          }
+       addmore.html("&#10010;<br>Add More")
+        addmore.attr("title","Add More")
+        
         addmore.addClass("btn btn-outline-light");
         addmore.attr("id", "add");
         $("#addmoregif").append(addmore)
