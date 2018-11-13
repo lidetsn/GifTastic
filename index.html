@@ -15,7 +15,12 @@
 </head>
 
 <body class="position-relative border">
-    <div class="container mt-5 mb-5 bg-info border border-white" id="Outer-container">
+    <div class="container d-none d-sm-block mt-5">
+        <div class="row">
+            <div class="col-md-12"></div>
+        </div>
+    </div>
+    <div class="container   mb-5 bg-info border border-white" id="Outer-container">
         <div class="row">
             <div class="col-12 text-center text-white py-3 " id="header">
                 <h1>GifTastic</h1>
@@ -47,27 +52,34 @@
                             </form>
                         </div>
                         <div class="col-md-6" id="middleDiv">
-                            
+
                         </div>
                         <div class="col-md-3 text-right border border-white" id="mygif">
-                                <button value="favorite" id="myfavorit" class="btn btn-outline-light my-1 ">My Favorit</button></div>
+                            <button value="favorite" id="myfavorit" class="btn btn-outline-light my-1 ">My Favorit</button></div>
                     </div>
-                </div> 
-                    
-                       <div class="container mt-0 sticky-top" id="inner-container-3"> 
-                        <div class="row bg-info">
-                        <div class="col-md-1 text-left pt-2 displaygif" id="addmoregif"></div>
-                        <div class="col-md-2 text-right pt-2 displaygif text-white " id="favoriteselected"></div>
-                        <div class="col-md-2 text-left pt-2 displaygif" id="addtofavorite"></div>
-                        <div class="col-md-4 text-center text-white pt-2 displaygif" id="displayinfo">
+                </div>
+
+                <div class="container mt-0 sticky-top" id="inner-container-3">
+
+
+                    <div class="row bg-info justify-content-center">
+                        <div class="col-xs-12 text-white pt-2 displaygif" id="displayinfo">
                         </div>
-                        <div class="col-md-3 text-right pt-2 displaygif" id="resetdiv"></div>
-                    </div> </div>
-            
-               
+                    </div>
+                    <div class="row bg-info mt-0 justify-content-end">
+                        <div class="col-xs-2 pt-2 displaygif mr-1 ml-0 mb-1" id="addmoregif" data-placement="top"></div>
+                        <div class="col-xs-9  pt-2 displaygif mr-1 mb-1" id="addtofavorite" data-placement="bottom"></div>
+                        <!-- <div class="col-md-6 text-right pt-2 displaygif"></div> -->
+                        <div class="col-xs-1  displaygif ml-1 pt-2 mb-1" id="resetdiv"></div>
+                    </div>
+                </div>
+
+
+
+
                 <div class="container mt-2 mb-1 " id="animal-container">
 
-                    <div class="row displaygif" id="display-selected-animal">
+                    <div class="row displaygif " id="display-selected-animal">
                         <!--colomns can automatically generated -->
                     </div>
                 </div>
@@ -80,6 +92,8 @@
         </div>
 
     </div>
+
+
     <footer class="text-center text-muted mx-auto mt-5  py-2  position-absolute w-100 border border-white ">&copy;2018
         Lidetu S Neshnega Seattle Wa</footer>
 
